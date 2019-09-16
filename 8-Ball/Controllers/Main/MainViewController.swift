@@ -12,11 +12,12 @@ import CoreData
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var ballImage: SpringImageView!
-    @IBOutlet weak var answerLabel: SpringLabel!
-    @IBOutlet weak var shakeIcon: SpringImageView!
+    @IBOutlet weak private var ballImage: SpringImageView!
+    @IBOutlet weak private var answerLabel: SpringLabel!
+    @IBOutlet weak private var shakeIcon: SpringImageView!
     
     private var answers = [NSManagedObject]()
+    private let dataService = DataService()
     
     
     // MARK: - Life cycle methods
@@ -32,15 +33,8 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CustAnswer")
-        
-        do {
-            answers = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        dataService.fetchRequest()
+        answers = dataService.answers
     }
     
     
@@ -52,7 +46,7 @@ class MainViewController: UIViewController {
     }
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
-        fillingsAnswerFromTheInternet()
+        fillingsAnswer()
     }
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
@@ -63,26 +57,29 @@ class MainViewController: UIViewController {
     
     // MARK: - Networking
     
-    private func fillingsAnswerFromTheInternet() {
+    private func fillingsAnswer() {
         
         if NetworkState().isConnected {
-            NetworkManager.shared.fetchDataWithAlamofire(url: NetworkManager.shared.link) { [weak self] (data) in
-                self?.answerLabel.text = data.magic.answer
+            let networkManager = NetworkManager()
+            networkManager.fetchData(url: networkManager.link) { [weak self] (data) in
+                if data == nil {
+                    self?.randomAnswers()
+                } else {
+                    self?.answerLabel.text = data?.magic.answer
+                }
             }
         } else {
-            randomAnswersFromCoreData()
+            randomAnswers()
         }
         self.ballImage.stopAnimating()
     }
     
-    private func randomAnswersFromCoreData() {
+    private func randomAnswers() {
         if answers.isEmpty == true {
             answerLabel?.text = "you're lucky!"
         } else {
-            answers.shuffle()
-            let randomValueForArray = Int.random(in: 0...answers.count-1)
-            let chooseAnswer = answers[randomValueForArray]
-            answerLabel?.text = chooseAnswer.value(forKeyPath: "custAnswer") as? String
+            let chooseAnswer = answers.randomElement 
+            answerLabel?.text = chooseAnswer()!.value(forKeyPath: "custAnswer") as? String
         }
     }
     
@@ -132,7 +129,8 @@ class MainViewController: UIViewController {
     
     @objc private func settingsTap() {
         
-        let vc = TableViewSettingControllerTableViewController(nibName: "TableViewSettingControllerTableViewController", bundle: nil)
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+

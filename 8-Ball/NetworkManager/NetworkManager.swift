@@ -10,24 +10,21 @@ import Alamofire
 
 class NetworkManager {
     
-    static let shared = NetworkManager()
-    private init() {}
-    
     var link = "https://8ball.delegator.com/magic/JSON/%3Cquestion_string%3E"
     
-    func fetchDataWithAlamofire(url: String, completion: @escaping (Answer) -> ()) {
+    func fetchData(url: String, completion: @escaping (Answer?) -> ()) {
         
         request(url).responseData { (dataResponse) in
             
             switch dataResponse.result {
             case .success(let data):
                 guard let data = try? JSONDecoder().decode(Answer.self, from: data) else {
-                    return
+                    completion(nil)
+                    return 
                 }
                 completion(data)
-            case .failure(let error):
-                print(error)
-                
+            case .failure :
+                completion(nil)
             }
         }
     }
@@ -37,6 +34,7 @@ struct NetworkState {
     
     var isConnected: Bool {
         
-        return NetworkReachabilityManager(host: NetworkManager.shared.link)!.isReachable
+        let networkManager = NetworkManager()
+        return NetworkReachabilityManager(host: networkManager.link)!.isReachable
     }
 }

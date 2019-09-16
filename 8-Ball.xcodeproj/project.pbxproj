@@ -14,9 +14,10 @@
 		048EF555231F9F6E00336757 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048EF553231F9F6E00336757 /* MainView.xib */; };
 		048EF558231FB36F00336757 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EF557231FB36F00336757 /* NetworkManager.swift */; };
 		048EF55C231FB45300336757 /* AnswersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EF55B231FB45300336757 /* AnswersModel.swift */; };
-		048EF564231FD7AB00336757 /* TableViewSettingControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EF562231FD7AB00336757 /* TableViewSettingControllerTableViewController.swift */; };
-		048EF565231FD7AB00336757 /* TableViewSettingControllerTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048EF563231FD7AB00336757 /* TableViewSettingControllerTableViewController.xib */; };
+		048EF564231FD7AB00336757 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EF562231FD7AB00336757 /* SettingsViewController.swift */; };
+		048EF565231FD7AB00336757 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048EF563231FD7AB00336757 /* SettingsViewController.xib */; };
 		048EF56823203B3B00336757 /* BallAnswer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 048EF56623203B3B00336757 /* BallAnswer.xcdatamodeld */; };
+		04C5F511232FAE1200E02E29 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5F510232FAE1200E02E29 /* DataService.swift */; };
 		FB8917125776392D5260FAC3 /* Pods_8_Ball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF63C1892769ACC46F8C6D4A /* Pods_8_Ball.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,9 +31,10 @@
 		048EF553231F9F6E00336757 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		048EF557231FB36F00336757 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		048EF55B231FB45300336757 /* AnswersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersModel.swift; sourceTree = "<group>"; };
-		048EF562231FD7AB00336757 /* TableViewSettingControllerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSettingControllerTableViewController.swift; sourceTree = "<group>"; };
-		048EF563231FD7AB00336757 /* TableViewSettingControllerTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewSettingControllerTableViewController.xib; sourceTree = "<group>"; };
+		048EF562231FD7AB00336757 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		048EF563231FD7AB00336757 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		048EF56723203B3B00336757 /* BallAnswer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BallAnswer.xcdatamodel; sourceTree = "<group>"; };
+		04C5F510232FAE1200E02E29 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		22FD9DB8B992B790AF4ACE28 /* Pods-8-Ball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-8-Ball.release.xcconfig"; path = "Target Support Files/Pods-8-Ball/Pods-8-Ball.release.xcconfig"; sourceTree = "<group>"; };
 		CCED523F54F0F1B46956E2B3 /* Pods-8-Ball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-8-Ball.debug.xcconfig"; path = "Target Support Files/Pods-8-Ball/Pods-8-Ball.debug.xcconfig"; sourceTree = "<group>"; };
 		CF63C1892769ACC46F8C6D4A /* Pods_8_Ball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_8_Ball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,8 +138,8 @@
 		048EF55D231FD3CA00336757 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				048EF562231FD7AB00336757 /* TableViewSettingControllerTableViewController.swift */,
-				048EF563231FD7AB00336757 /* TableViewSettingControllerTableViewController.xib */,
+				048EF562231FD7AB00336757 /* SettingsViewController.swift */,
+				048EF563231FD7AB00336757 /* SettingsViewController.xib */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				048EF56623203B3B00336757 /* BallAnswer.xcdatamodeld */,
+				04C5F510232FAE1200E02E29 /* DataService.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -229,7 +232,7 @@
 			files = (
 				048EF555231F9F6E00336757 /* MainView.xib in Resources */,
 				048EF544231F90E500336757 /* LaunchScreen.storyboard in Resources */,
-				048EF565231FD7AB00336757 /* TableViewSettingControllerTableViewController.xib in Resources */,
+				048EF565231FD7AB00336757 /* SettingsViewController.xib in Resources */,
 				048EF541231F90E500336757 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,7 +286,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048EF564231FD7AB00336757 /* TableViewSettingControllerTableViewController.swift in Sources */,
+				048EF564231FD7AB00336757 /* SettingsViewController.swift in Sources */,
+				04C5F511232FAE1200E02E29 /* DataService.swift in Sources */,
 				048EF558231FB36F00336757 /* NetworkManager.swift in Sources */,
 				048EF56823203B3B00336757 /* BallAnswer.xcdatamodeld in Sources */,
 				048EF554231F9F6E00336757 /* MainViewController.swift in Sources */,

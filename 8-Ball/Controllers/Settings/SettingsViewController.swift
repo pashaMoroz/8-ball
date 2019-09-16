@@ -9,12 +9,12 @@
 import UIKit
 import CoreData
 
-class TableViewSettingControllerTableViewController: UITableViewController {
+class SettingsViewController: UITableViewController {
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let cellID = "cell"
     private var answers = [NSManagedObject]()
-    
+    private let dataService = DataService()
     
     // MARK: - Life cycle methods
     
@@ -27,14 +27,8 @@ class TableViewSettingControllerTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CustAnswer")
-        
-        do {
-            answers = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        dataService.fetchRequest()
+        answers = dataService.answers
     }
     
     
@@ -61,7 +55,7 @@ class TableViewSettingControllerTableViewController: UITableViewController {
     
     private func saveData(_ taskName: String) {
         
-        let managedContext = appDelegate.persistentContainer.viewContext // Создание объекта Managed Object Context
+        let managedContext = dataService.persistentContainer.viewContext // Создание объекта Managed Object Context
         guard let entity = NSEntityDescription.entity(forEntityName: "CustAnswer", in: managedContext) else { return } // Создаение объекта сущности
         let task = NSManagedObject(entity: entity, insertInto: managedContext) as! CustAnswer // Экземпляр модели Answer
         task.custAnswer = taskName // Присваиваем значение свойству name
@@ -84,9 +78,9 @@ class TableViewSettingControllerTableViewController: UITableViewController {
             _, indexPath in
             
             
-            let container = self.appDelegate.persistentContainer
+            let container = self.dataService.persistentContainer
             container.viewContext.delete(self.answers[indexPath.row])
-            self.appDelegate.saveContext()
+            self.dataService.saveContext()
             
             self.answers.remove(at: indexPath.row)
             tableView.reloadData()
